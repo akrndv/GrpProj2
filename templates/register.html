@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NTUBank Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="left-image">
+            <img src="https://c0.wallpaperflare.com/preview/477/348/53/handrail-banister-building-architecture.jpg">
+        </div>
+        <div class="form-section half-width">
+            <div class="form-header">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f8/Nanyang_Technological_University_coat_of_arms_vector.svg/1200px-Nanyang_Technological_University_coat_of_arms_vector.svg.png" class="logo" alt="Logo">
+                <h2>NTUBank</h2>
+            </div>
+            <h2 class="section-title">Registration</h2>
+            {% if error %}
+                <p class="error-message">{{ error }}</p>
+            {% endif %}
+            <form action="/register" method="post">
+                <label for="username">Username:</label>
+                <input type="text" name="username" required>
+                
+                <label for="password">Password:</label>
+                <input type="password" name="password" required>
+                
+                <input type="submit" value="Register" class="btn-primary">
+            </form>
+
+            <!-- Main Button -->
+            <form action = "/" method = "get">
+                <input type = "submit" value = "Main" class="btn-secondary">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
