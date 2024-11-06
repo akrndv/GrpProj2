@@ -12,7 +12,7 @@ app.secret_key = "secret"
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
-api = "AIzaSyBEz3h2Kn6Cuww-LFEwX0QUrMk829nedHU" #to remove when posted to github
+api = os.getenv("MAKERSUITE_API_TOKEN")
 genai.configure(api_key=api)
 model = genai.GenerativeModel("gemini-1.5-flash")
 
