@@ -17,7 +17,9 @@
                 <h2 class="header-title">NTUBank</h2>
                 <div class="user-profile">
                     <img src="https://oneill.law.georgetown.edu/wp-content/uploads/2021/06/generic-profile.png" class="profile-icon">
-                    <span class="username">{{username}}</span>
+                    <form action="/profile" method="post">
+                        <input type="submit" value={{username}} class="profile-button">
+                    </form>
                     <form action="/logout" method="post">
                         <input type="submit" value="Logout" class="logout-button">
                     </form>
@@ -59,7 +61,7 @@
             </nav>
 
             <!-- Welcome Section -->
-            <h2 class="welcome-message">Welcome to NTUBank, (username) !</h2> <!-- to change to {{username}}-->
+            <h2 class="welcome-message">Welcome to NTUBank, {{username}} !</h2> 
             <div class="account-details">
                 <div class="account-type">NTUBank Savings Account</div>
                 <div class="account-number">123-4-567890</div> <!-- to change to acct no.-->

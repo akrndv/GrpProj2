@@ -19,7 +19,9 @@
                 <h2 class="header-title">NTUBank</h2>
                 <div class="user-profile">
                     <img src="https://oneill.law.georgetown.edu/wp-content/uploads/2021/06/generic-profile.png" class="profile-icon">
-                    <span class="username">{{username}}</span>
+                    <form action="/profile" method="post">
+                        <input type="submit" value={{username}} class="profile-button">
+                    </form>
                     <form action="/logout" method="post">
                         <input type="submit" value="Logout" class="logout-button">
                     </form>

@@ -1,21 +1,22 @@
-from flask import Flask, render_template, jsonify, request, redirect, url_for, session, flash
+from flask import Flask, render_template, request, session, redirect, url_for
 import bcrypt
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime, timedelta
 import google.generativeai as genai
-import os
 
-api = os.getenv("MAKERSUITE_API_TOKEN")
+# to add database stuff pls
+
+app = Flask(__name__)
+app.secret_key = "secret"
+app.config['SESSION_TYPE'] = 'filesystem'
+Session(app)
+
+api = "AIzaSyBEz3h2Kn6Cuww-LFEwX0QUrMk829nedHU" #to remove when posted to github
 genai.configure(api_key=api)
 model = genai.GenerativeModel("gemini-1.5-flash")
 
 users = {}
-
-app = Flask(__name__)
-
-app.secret_key = 'its_a_secret'
-app.config['SESSION_TYPE'] = 'filesystem'
-Session(app)
 
 @app.route("/", methods=["GET", "POST"])
 def login():
@@ -26,7 +27,7 @@ def login():
             if data['name'] == username:
                 if bcrypt.checkpw(password, data['password']):
                     session['username'] = user
-                    return redirect(url_for('index'))
+                    return redirect(url_for('dashboard'))
                 else:
                     return render_template("login.html", error="Incorrect password")
         return render_template("login.html", error="Username not found")
@@ -51,21 +52,89 @@ def register():
         return redirect(url_for('login'))
     return render_template("register.html")
 
-@app.route("/index", methods=['GET', 'POST'])
-def index():
+
+@app.route("/dashboard", methods=['GET', 'POST'])
+def dashboard():
     username = session.get('username')
 
     if username in users:
         display_name = users[username]['name']
-        return render_template("index.html", username=display_name) 
+        return render_template("dashboard.html", username=display_name) 
     return redirect(url_for('login'))
+
+@app.route("/profile", methods=['GET', 'POST'])
+def profile():
+    breadcrumbs = [
+        {"name": "Dashboard", "url": "/dashboard"},
+        {"name": "User Profile", "url": "/profile"}
+    ]
+
+    username = session.get('username')
+    
+    if request.method == 'POST':
+        new_name = request.form.get('name')
+        new_email = request.form.get('email')
+        new_password = request.form.get('password')
+
+        if new_name:
+            old_name = users[username]['name']
+            users[username]['name'] = new_name
+            # Update all references to the old name
+            for user, data in users.items():
+                if data['name'] == old_name:
+                    data['name'] = new_name
+        if new_email:
+            users[username]['email'] = new_email
+        if new_password:
+            # Update both the hashed and plain text password
+            users[username]['password'] = bcrypt.hashpw(new_password.encode('utf-8'), bcrypt.gensalt())
+            users[username]['plain_password'] = new_password
+        
+        flash('Profile updated successfully!', 'success')
+
+    user = users[username]
+    return render_template("profile.html", readcrumbs=breadcrumbs, user=user)
 
 @app.route("/transfer",methods=["GET","POST"])
 def transfer():
-    return(render_template("transfer.html"))
+    breadcrumbs = [
+        {"name": "Dashboard", "url": "/dashboard"},
+        {"name": "Money Transfer", "url": "/transfer"}
+    ]
+    return (render_template("transfer.html", breadcrumbs=breadcrumbs))
 
 @app.route("/expense", methods=["GET", "POST"])
-def expense():
+def expSum():
+    breadcrumbs = [
+        {"name": "Dashboard", "url": "/dashboard"},
+        {"name": "Expense Summary", "url": "/expense"}
+    ]
+
+    expenses = session.get('expenses', {})
+    
+    # Initialize total expenses
+    total_expenses = 0
+    
+    # Check if expenses is a dictionary
+    if isinstance(expenses, dict):
+        for date, categories in expenses.items():
+            # Check if categories is a dictionary
+            if isinstance(categories, dict):
+                # Sum up only valid numeric amounts
+                total_expenses += sum(amount for amount in categories.values() if isinstance(amount, (int, float)))
+            else:
+                print(f"Warning: Expected a dict for categories but got {type(categories)} for date {date}")
+
+    return render_template("expSum.html", breadcrumbs=breadcrumbs, expenses=expenses, total_expenses=total_expenses)
+
+@app.route("/add", methods=["GET", "POST"])
+def add():
+    breadcrumbs = [
+        {"name": "Dashboard", "url": "/dashboard"},
+        {"name": "Expense Summary", "url": "/expense"},
+        {"name": "Add Expense", "url": "/add"}
+    ]
+
     if request.method == 'POST':
         # Get data from the form
         category = request.form.get('category')  # Safely get the category field
@@ -93,63 +162,77 @@ def expense():
         else:
             session['expenses'][date][category] = amount
 
-        return redirect(url_for('summary'))
+        return redirect(url_for('expSum'))
 
-    return render_template("expense.html")
+    return render_template("expAdd.html", breadcrumbs=breadcrumbs)
 
-@app.route("/summary", methods=["GET", "POST"])
-def summary():
+@app.route('/budget', methods=["GET", 'POST'])
+def budget_dashboard():
+    breadcrumbs = [
+        {"name": "Dashboard", "url": "/dashboard"},
+        {"name": "Budgeting", "url": "/budget"}
+    ]
+
+    if 'expenses' not in session:
+        session['expenses'] = {}
+    return render_template('budget.html', breadcrumbs=breadcrumbs, expenses=session['expenses'])
+
+@app.route('/calculate_budget', methods=['POST'])
+def calculate_budget():
+    breadcrumbs = [
+        {"name": "Dashboard", "url": "/dashboard"},
+        {"name": "Budgeting", "url": "/budget"},
+        {"name": "Budgeting Advice", "url": "/calculate_budget"},
+    ]
+
+    # Get monthly budget from the form
+    monthly_budget = float(request.form.get('monthly_budget', 0))
     expenses = session.get('expenses', {})
+
+    # Calculate total expenses and remaining budget
+    total_spent = sum(amount for daily in expenses.values() for amount in daily.values())
+    remaining_budget = monthly_budget - total_spent
+
+    if remaining_budget < 0:
+        status = "You're over budget."
+    elif remaining_budget > monthly_budget * 0.5:
+        status = "Good budgeting! Consider saving some funds for future goals."
+    else:
+        status = "You're within budget."
+
+    # Generate advice with AI
+    today = datetime.today()
+    end_of_month = datetime(today.year, today.month + 1, 1) - timedelta(days=1)
+    days_remaining = (end_of_month-today).days
     
-    # Initialize total expenses
-    total_expenses = 0
+
+    q = (
+        f"I have a monthly budget of ${monthly_budget} and expenses totaling ${total_spent}. "
+        f"My expenses are {expenses}. There are {days_remaining} days left in the month. "
+        f"Can you provide me with 5 pieces of advice on how to manage my budget based on my expenses?"
+    )
     
-    # Check if expenses is a dictionary
-    if isinstance(expenses, dict):
-        for date, categories in expenses.items():
-            # Check if categories is a dictionary
-            if isinstance(categories, dict):
-                # Sum up only valid numeric amounts
-                total_expenses += sum(amount for amount in categories.values() if isinstance(amount, (int, float)))
-            else:
-                print(f"Warning: Expected a dict for categories but got {type(categories)} for date {date}")
+    r = model.generate_content(q)
+    formatted_r = r.text.replace("*", "").replace("\n", "<br>")
 
-    return render_template("summary.html", expenses=expenses, total_expenses=total_expenses)
-
-@app.route("/profile", methods=['GET', 'POST'])
-def profile():
-    username = session.get('username')
-    
-    if request.method == 'POST':
-        new_name = request.form.get('name')
-        new_email = request.form.get('email')
-        new_password = request.form.get('password')
-
-        if new_name:
-            old_name = users[username]['name']
-            users[username]['name'] = new_name
-            # Update all references to the old name
-            for user, data in users.items():
-                if data['name'] == old_name:
-                    data['name'] = new_name
-        if new_email:
-            users[username]['email'] = new_email
-        if new_password:
-            # Update both the hashed and plain text password
-            users[username]['password'] = bcrypt.hashpw(new_password.encode('utf-8'), bcrypt.gensalt())
-            users[username]['plain_password'] = new_password
-        
-        flash('Profile updated successfully!', 'success')
-
-    user = users[username]
-    return render_template("profile.html", user=user)
+    return render_template('budget_summary.html', breadcrumbs=breadcrumbs, total_spent=total_spent, remaining_budget=remaining_budget, status= status, advice=formatted_r)
 
 @app.route("/goal", methods=["GET", "POST"])
 def goal():
-    return render_template("goal.html")
+    breadcrumbs = [
+        {"name": "Dashboard", "url": "/dashboard"},
+        {"name": "Goal", "url": "/goal"}
+    ]
+    return render_template("goal.html",breadcrumbs=breadcrumbs)
 
 @app.route("/goal_advice",methods=["GET","POST"])
 def goal_advice():
+    breadcrumbs = [
+        {"name": "Dashboard", "url": "/dashboard"},
+        {"name": "Goal", "url": "/goal"},
+        {"name": "Goal Advice", "url": "/goal_advice"}
+    ]
+        
     balance = request.form.get("balance", 0)
     retirementGoal = request.form.get("retirementGoal", 0)
     targetYear1 = request.form.get("targetYear1")
@@ -162,7 +245,51 @@ def goal_advice():
 
     r = model.generate_content(q)
     formatted_r = r.text.replace("*", "").replace("\n", "<br>")
-    return(render_template("goal_advice.html",r=formatted_r))
+    return(render_template("goal_advice.html",breadcrumbs=breadcrumbs,r=formatted_r))
+
+
+@app.route("/invest", methods = ["GET", "POST"])
+def investment_dashboard():
+    breadcrumbs = [
+    {"name": "Dashboard", "url": "/dashboard"},
+    {"name": "Investing", "url": "/invest"}
+    ]
+
+    investment_options = [
+        {"type": "Stocks", "description": "Equity investments with high growth potential."},
+        {"type": "Bonds", "description": "Debt securities with stable returns."},
+        {"type": "Mutual Funds", "description": "Pooled investments managed by professionals."},
+        {"type": "Real Estate", "description": "Property investments for steady cash flow."},
+        {"type": "Commodities", "description": "Invest in resources like gold and oil."},
+    ]
+
+    return render_template("invest.html", breadcrumbs=breadcrumbs, investment_options=investment_options)
+
+@app.route("/investment_advice", methods = ["GET", "POST"])
+def investment_advice():
+    breadcrumbs = [
+    {"name": "Dashboard", "url": "/dashboard"},
+    {"name": "Investing", "url": "/invest"},
+    {"name": "Investment Advice", "url": "/investment_advice"}
+    ]
+    
+    if request.method == "POST":
+        #User inputs
+        risk_level = request.form.get("risk_level")
+        investment_amount = request.form.get("investment_amount")
+        time_horizon = request.form.get("time_horizon")
+
+        q = (
+            f"I have an investment amount of ${investment_amount} with a {risk_level} risk tolerance and a time horizon of {time_horizon} years."
+            "Please provide advice on how to allocate this investment in stocks, bonds, and other assets."
+        )
+
+        r = model.generate_content(q)
+        formatted_r = r.generated_text.replace("*", "").replace("\n", "<br>")
+
+        return render_template("invest.html", advice = formatted_r)
+    
+    return render_template("investment_advice.html", breadcrumbs=breadcrumbs, advice=None)
 
 @app.route("/logout", methods=["POST"])
 def logout():
@@ -170,4 +297,4 @@ def logout():
     return redirect(url_for('login'))
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
