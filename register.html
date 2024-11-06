@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>NTUBank Dashboard</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <div class="wrapper">
+
+            <div class="form-section">
+                <div class="form-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f8/Nanyang_Technological_University_coat_of_arms_vector.svg/1200px-Nanyang_Technological_University_coat_of_arms_vector.svg.png" class="logo" alt="Logo">
+                    <h2>NTUBank</h2>
+                </div>
+
+                <h2 class="section-title"> Registration </h2>
+
+                {% if error %}
+                    <p class="error-message">{{ error }}</p>
+                {% endif %}
+
+                <form action="/register" method="post">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" required>
+                    
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" required>
+                    
+                    <button type="submit"> Register </button>
+                </form>
+                
+                <form action="/" method="get">
+                    <button type="submit"> Main </button>
+                </form>
+
+            </div>
+
+        </div>
+
+        <!-- Chatbot Script -->
+        <script src="https://account.snatchbot.me/script.js"></script>
+        <script>window.sntchChat.Init(399474)</script>
+    </body>
+</html>

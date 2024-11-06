@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>NTUBank Dashboard</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <div class="wrapper">
+            <!-- Header Section -->
+            <div class="header">
+                <div class="header-logo">
+                    <div class="logo-wrapper">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f8/Nanyang_Technological_University_coat_of_arms_vector.svg/1200px-Nanyang_Technological_University_coat_of_arms_vector.svg.png" class="logo">
+                    </div>
+                </div>
+                <h2 class="header-title">NTUBank</h2>
+
+            </div>
+
+            <div class="form-section">
+                <div class="form-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f8/Nanyang_Technological_University_coat_of_arms_vector.svg/1200px-Nanyang_Technological_University_coat_of_arms_vector.svg.png" class="logo" alt="Logo">
+                    <h2>NTUBank</h2>
+                </div>
+
+                <h2 class="section-title">Login to your account</h2>
+
+                {% if error %}
+                    <p class="error-message">{{ error }}</p>
+                {% endif %}
+
+                <form method="POST">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                    <button type="submit" class="btn-primary">Login</button>
+                </form>
+                
+                <form action="/register" method="get">
+                    <button type="submit" class="btn-secondary">Register</button>
+                </form>
+
+            </div>
+
+        </div>
+
+        <!-- Chatbot Script -->
+        <script src="https://account.snatchbot.me/script.js"></script>
+        <script>window.sntchChat.Init(399474)</script>
+    </body>
+</html>

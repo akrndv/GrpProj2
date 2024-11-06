@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>NTUBank Dashboard</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+            <div class="wrapper">
+            <!-- Header Section -->
+            <div class="header">
+                <div class="header-logo">
+                    <div class="logo-wrapper">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f8/Nanyang_Technological_University_coat_of_arms_vector.svg/1200px-Nanyang_Technological_University_coat_of_arms_vector.svg.png" class="logo">
+                    </div>
+                </div>
+                <h2 class="header-title">NTUBank</h2>
+                <div class="user-profile">
+                    <img src="https://oneill.law.georgetown.edu/wp-content/uploads/2021/06/generic-profile.png" class="profile-icon">
+                    <span class="username">{{username}}</span>
+                    <form action="/logout" method="post">
+                        <input type="submit" value="Logout" class="logout-button">
+                    </form>
+                </div>
+            </div>
+
+            <!-- Navigation Section -->
+            <div class="navigation">
+                <form action="/transfer" method="get">
+                    <input type="submit" value="Money Transfer" class="nav-button">
+                </form>
+                <form action="/expense" method="get">
+                    <input type="submit" value="Expense Tracker" class="nav-button">
+                </form>
+                <form action="/budget" method="get">
+                    <input type="submit" value="Budgeting" class="nav-button">
+                </form>
+                <form action="/goal" method="get">
+                    <input type="submit" value="Goal Planning" class="nav-button">
+                </form>
+                <form action="/invest" method="get">
+                    <input type="submit" value="Investing" class="nav-button">
+                </form>
+            </div>
+
+            <!-- Breadcrumb Navigation Section -->
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    {% for breadcrumb in breadcrumbs %}
+                        <li>
+                            {% if not loop.last %}
+                                <a href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a>
+                            {% else %}
+                                {{ breadcrumb.name }}
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+
+            <!-- Main Body -->
+        
+            <h1 class="section-title"> Goal Advice </h1>
+
+            <h4> {{r|safe}} </h4>
+
+        </div>
+
+        <!-- Chatbot Script -->
+        <script src="https://account.snatchbot.me/script.js"></script>
+        <script>window.sntchChat.Init(399474)</script>
+    </body>
+</html>

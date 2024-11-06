@@ -1,0 +1,105 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>NTUBank Dashboard</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+            <div class="wrapper">
+            <!-- Header Section -->
+            <div class="header">
+                <div class="header-logo">
+                    <div class="logo-wrapper">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f8/Nanyang_Technological_University_coat_of_arms_vector.svg/1200px-Nanyang_Technological_University_coat_of_arms_vector.svg.png" class="logo">
+                    </div>
+                </div>
+                <h2 class="header-title">NTUBank</h2>
+                <div class="user-profile">
+                    <img src="https://oneill.law.georgetown.edu/wp-content/uploads/2021/06/generic-profile.png" class="profile-icon">
+                    <form action="/profile" method="post">
+                        <input type="submit" value={{username}} class="profile-button">
+                    </form>
+                    <form action="/logout" method="post">
+                        <input type="submit" value="Logout" class="logout-button">
+                    </form>
+                </div>
+            </div>
+
+            <!-- Navigation Section -->
+            <div class="navigation">
+                <form action="/transfer" method="get">
+                    <input type="submit" value="Money Transfer" class="nav-button">
+                </form>
+                <form action="/expense" method="get">
+                    <input type="submit" value="Expense Tracker" class="nav-button">
+                </form>
+                <form action="/budget" method="get">
+                    <input type="submit" value="Budgeting" class="nav-button">
+                </form>
+                <form action="/goal" method="get">
+                    <input type="submit" value="Goal Planning" class="nav-button">
+                </form>
+                <form action="/invest" method="get">
+                    <input type="submit" value="Investing" class="nav-button">
+                </form>
+            </div>
+
+            <!-- Breadcrumb Navigation Section -->
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    {% for breadcrumb in breadcrumbs %}
+                        <li>
+                            {% if not loop.last %}
+                                <a href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a>
+                            {% else %}
+                                {{ breadcrumb.name }}
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+
+            <!-- Main Body -->
+        
+            <h1 class="section-title"> User Profile </h1>
+
+            <div class="form-section">
+                <img src="https://oneill.law.georgetown.edu/wp-content/uploads/2021/06/generic-profile.png" class="profile-image">
+
+                <form method="POST">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" value="{{ user.name }}" required>
+                
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" value="{{ user.email }}" required>
+                
+                    <label for="password">Password:</label>
+                    <input type="text" id="password-display" value="{{ user.plain_password }}" disabled>
+                    <button type="button" id="edit-password-btn">Edit</button>
+                
+                    <div id="edit-password" class="hidden">
+                        <label for="new-password">New Password:</label>
+                        <input type="password" name="password" placeholder="New Password">
+                    </div>
+                
+                    <button type="submit" id="save-button">Save Changes</button>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- Edit Password Script -->
+        <script>
+            document.getElementById('edit-password-btn').addEventListener('click', function() {
+                const editDiv = document.getElementById('edit-password');
+                editDiv.classList.toggle('hidden');
+                this.textContent = editDiv.classList.contains('hidden') ? 'Edit' : 'Cancel';
+            });
+        </script>
+
+        <!-- Chatbot Script -->
+        <script src="https://account.snatchbot.me/script.js"></script>
+        <script>window.sntchChat.Init(399474)</script>
+    </body>
+</html>
