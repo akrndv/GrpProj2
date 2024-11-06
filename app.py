@@ -93,7 +93,8 @@ def profile():
         flash('Profile updated successfully!', 'success')
 
     user = users[username]
-    return render_template("profile.html", readcrumbs=breadcrumbs, user=user)
+    display_name = users[session.get('username')]['name']
+    return render_template("profile.html", breadcrumbs=breadcrumbs, user=user, username=display_name)
 
 @app.route("/transfer",methods=["GET","POST"])
 def transfer():
@@ -101,14 +102,17 @@ def transfer():
         {"name": "Dashboard", "url": "/dashboard"},
         {"name": "Money Transfer", "url": "/transfer"}
     ]
-    return (render_template("transfer.html", breadcrumbs=breadcrumbs))
+    display_name = users[session.get('username')]['name']
+    return (render_template("transfer.html", breadcrumbs=breadcrumbs, username=display_name))
 
 @app.route("/expense", methods=["GET", "POST"])
 def expSum():
     breadcrumbs = [
         {"name": "Dashboard", "url": "/dashboard"},
-        {"name": "Expense Summary", "url": "/expense"}
+        {"name": "Expense Summary", "url": "/expSum"}
     ]
+
+    display_name = users[session.get('username')]['name']
 
     expenses = session.get('expenses', {})
     
@@ -125,15 +129,16 @@ def expSum():
             else:
                 print(f"Warning: Expected a dict for categories but got {type(categories)} for date {date}")
 
-    return render_template("expSum.html", breadcrumbs=breadcrumbs, expenses=expenses, total_expenses=total_expenses)
+    return render_template("expSum.html", breadcrumbs=breadcrumbs, username=display_name, expenses=expenses, total_expenses=total_expenses)
 
 @app.route("/add", methods=["GET", "POST"])
 def add():
     breadcrumbs = [
         {"name": "Dashboard", "url": "/dashboard"},
-        {"name": "Expense Summary", "url": "/expense"},
+        {"name": "Expense Summary", "url": "/expSum"},
         {"name": "Add Expense", "url": "/add"}
     ]
+    display_name = users[session.get('username')]['name']
 
     if request.method == 'POST':
         # Get data from the form
@@ -164,18 +169,19 @@ def add():
 
         return redirect(url_for('expSum'))
 
-    return render_template("expAdd.html", breadcrumbs=breadcrumbs)
+    return render_template("expAdd.html", breadcrumbs=breadcrumbs, username=display_name)
 
 @app.route('/budget', methods=["GET", 'POST'])
-def budget_dashboard():
+def budget():
     breadcrumbs = [
         {"name": "Dashboard", "url": "/dashboard"},
         {"name": "Budgeting", "url": "/budget"}
     ]
+    display_name = users[session.get('username')]['name']
 
     if 'expenses' not in session:
         session['expenses'] = {}
-    return render_template('budget.html', breadcrumbs=breadcrumbs, expenses=session['expenses'])
+    return render_template('budget.html', breadcrumbs=breadcrumbs, username=display_name, expenses=session['expenses'])
 
 @app.route('/calculate_budget', methods=['POST'])
 def calculate_budget():
@@ -184,6 +190,7 @@ def calculate_budget():
         {"name": "Budgeting", "url": "/budget"},
         {"name": "Budgeting Advice", "url": "/calculate_budget"},
     ]
+    display_name = users[session.get('username')]['name']
 
     # Get monthly budget from the form
     monthly_budget = float(request.form.get('monthly_budget', 0))
@@ -215,7 +222,7 @@ def calculate_budget():
     r = model.generate_content(q)
     formatted_r = r.text.replace("*", "").replace("\n", "<br>")
 
-    return render_template('budget_summary.html', breadcrumbs=breadcrumbs, total_spent=total_spent, remaining_budget=remaining_budget, status= status, advice=formatted_r)
+    return render_template('budget_advice.html', breadcrumbs=breadcrumbs, username=display_name, total_spent=total_spent, remaining_budget=remaining_budget, status= status, advice=formatted_r)
 
 @app.route("/goal", methods=["GET", "POST"])
 def goal():
@@ -223,6 +230,7 @@ def goal():
         {"name": "Dashboard", "url": "/dashboard"},
         {"name": "Goal", "url": "/goal"}
     ]
+    display_name = users[session.get('username')]['name']
     return render_template("goal.html",breadcrumbs=breadcrumbs)
 
 @app.route("/goal_advice",methods=["GET","POST"])
@@ -232,6 +240,7 @@ def goal_advice():
         {"name": "Goal", "url": "/goal"},
         {"name": "Goal Advice", "url": "/goal_advice"}
     ]
+    display_name = users[session.get('username')]['name']
         
     balance = request.form.get("balance", 0)
     retirementGoal = request.form.get("retirementGoal", 0)
@@ -245,7 +254,7 @@ def goal_advice():
 
     r = model.generate_content(q)
     formatted_r = r.text.replace("*", "").replace("\n", "<br>")
-    return(render_template("goal_advice.html",breadcrumbs=breadcrumbs,r=formatted_r))
+    return(render_template("goal_advice.html",breadcrumbs=breadcrumbs,username=display_name, r=formatted_r))
 
 
 @app.route("/invest", methods = ["GET", "POST"])
@@ -254,6 +263,7 @@ def investment_dashboard():
     {"name": "Dashboard", "url": "/dashboard"},
     {"name": "Investing", "url": "/invest"}
     ]
+    display_name = users[session.get('username')]['name']
 
     investment_options = [
         {"type": "Stocks", "description": "Equity investments with high growth potential."},
@@ -263,7 +273,7 @@ def investment_dashboard():
         {"type": "Commodities", "description": "Invest in resources like gold and oil."},
     ]
 
-    return render_template("invest.html", breadcrumbs=breadcrumbs, investment_options=investment_options)
+    return render_template("invest.html", breadcrumbs=breadcrumbs, username=display_name, investment_options=investment_options)
 
 @app.route("/investment_advice", methods = ["GET", "POST"])
 def investment_advice():
@@ -272,6 +282,7 @@ def investment_advice():
     {"name": "Investing", "url": "/invest"},
     {"name": "Investment Advice", "url": "/investment_advice"}
     ]
+    display_name = users[session.get('username')]['name']
     
     if request.method == "POST":
         #User inputs
@@ -287,9 +298,9 @@ def investment_advice():
         r = model.generate_content(q)
         formatted_r = r.generated_text.replace("*", "").replace("\n", "<br>")
 
-        return render_template("invest.html", advice = formatted_r)
+        return render_template("investment_advSum.html", username=display_name, advice = formatted_r)
     
-    return render_template("investment_advice.html", breadcrumbs=breadcrumbs, advice=None)
+    return render_template("investment_advice.html", breadcrumbs=breadcrumbs, username=display_name, advice=None)
 
 @app.route("/logout", methods=["POST"])
 def logout():

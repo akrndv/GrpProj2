@@ -85,55 +85,35 @@
             let chart;
 
             function updateChart() {
-                const selectedDate = document.getElementById('dateSelector').value;
-                const categories = expenses[selectedDate] || {};
+            const selectedDate = document.getElementById('dateSelector').value;
+            const categories = expenses[selectedDate] || {};
 
-                const labels = Object.keys(categories);
-                const data = Object.values(categories);
+            const labels = Object.keys(categories);
+            const data = Object.values(categories);
 
-                if (chart) {
-                    chart.destroy(); // Destroy existing chart instance
-                }
+            if (chart) {
+                chart.destroy(); // Destroy existing chart instance
+            }
 
-                chart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: 'Expenses by Category',
-                            data: data,
-                            backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
+            chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Expenses by Category',
+                        data: data
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
                         }
                     }
-                });
-            }
-
-            // Set default date and initialize chart if applicable
-            const dateSelector = document.getElementById('dateSelector');
-            if (dateSelector) {
-                dateSelector.addEventListener('change', updateChart);
-
-                // Optionally set a default date if available
-                if (Object.keys(expenses).length > 0) {
-                    dateSelector.value = Object.keys(expenses)[0]; // Sets the first date with data
                 }
-                updateChart(); // Initialize chart with the default or selected date
-            }
-        });
-
-        // Placeholder add function (define if needed)
-        function add() {
-            alert("Add Expense functionality not yet implemented.");
+            });
         }
+
     </script>
 
     <!-- Chatbot Script -->

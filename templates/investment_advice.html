@@ -64,7 +64,7 @@
         
             <h1 class="section-title"> Investment Advice </h1>
 
-            <form class="form-section">
+            <form action="/investment_advice" class="form-section" method="POST">
                 <label for="risk_level">Risk Level:</label>
                 <select name="risk_level" required>
                     <option value="Low">Low</option>
@@ -84,11 +84,6 @@
 
                 <button type="submit">Get Advice</button>
             </form>
-
-            {% if advice %}
-                <h2>Investment Advice:</h2>
-                <p>{{ advice|safe }}</p>
-            {% endif %}
 
         </div>
 

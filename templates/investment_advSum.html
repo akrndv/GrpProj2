@@ -4,8 +4,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>NTUBank Dashboard</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="{{ url_for('static', filename='expense.js') }}"></script>
     </head>
     <body>
             <div class="wrapper">
@@ -64,43 +62,11 @@
 
             <!-- Main Body -->
         
-            <h1 class="section-title"> Expense Tracker </h1>
+            <h1 class="section-title"> Investment Advice </h1>
 
-            <form id="ExpenseForm" class="form-section" onsubmit="transfer">
-                <label for = "category"> Category: </label>
-
-                <select id="category" name="category" required>
-                    <option value="" disabled selected>Select a category</option>
-                    <option value="rent">Rent</option>
-                    <option value="groceries">Groceries</option>
-                    <option value="food">Food</option>
-                    <option value="transport">Transport</option>
-                    <option value="entertainment">Entertainment</option>
-                    <option value="utilities">Utilities</option>
-                    <option value="health">Health</option>
-                    <option value="clothing">Clothing</option>
-                    <option value="education">Education</option>
-                    <option value="work">Work</option>
-                    <option value="others">Others</option>
-                </select>
-
-                <label for = "amount"> Amount: </label>
-                <input type="number" name="Amount" step="0.01" required>
-
-                <label for = "date"> Date: </label>
-                <input type="date" name="date" required>
-
-                <button> Add Expense </button>
-
-            </form>
-
-            <form action="/expense" class="form-section">
-                <input type="submit" value="View Summary">
-            </form>
+            <h4> {{advice|safe}} </h4>
 
         </div>
-
-        
 
         <!-- Chatbot Script -->
         <script src="https://account.snatchbot.me/script.js"></script>
