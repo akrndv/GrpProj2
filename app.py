@@ -4,6 +4,7 @@ from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timedelta
 import google.generativeai as genai
+import os
 
 # to add database stuff pls
 
