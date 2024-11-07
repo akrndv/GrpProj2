@@ -1,168 +1,301 @@
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>NTUBank Dashboard</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    </head>
-    <body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+  <title>Bank Homepage</title>
+</head>
+
+<body>
+  <!-- Chatbot Script -->
+  <script src="https://account.snatchbot.me/script.js"></script>
+  <script>window.sntchChat.Init(399474)</script>
+
+  <!-- Main container -->
+  <div class="container">
+
+    <!-- Header Section -->
+    <header>
+      <nav class="navbar">
+        <img src="static/images/logo.svg">
+
+        <button class="navbar-toggle-btn">
+          <span class="one"></span>
+          <span class="two"></span>
+          <span class="three"></span>
+        </button>
+
+        <ul class="navbar-nav">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#service">Services</a></li>
+          <li><a href="#news">News</a></li>
+          <li><a href="#footer">Contact</a></li>
+        </ul>
+        
+        <div class="user-profile">
+          <img src= "https://oneill.law.georgetown.edu/wp-content/uploads/2021/06/generic-profile.png" class="profile-icon">
+          <form action="/profile" method="post">
+            <input type="submit" value={{username}} class="profile-button">
+          </form>
+          <form action="/logout" method="post">
+            <button type="submit" class="btn-primary">Logout</button>
+          </form>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Home Section -->
+      <section class="home" id="home">
+
+        <div class="home-img-box">
+          <img src="static/images/image-mockups.png" alt="Image for NTUBank Banner" class="home-img" width="100%">
+        </div>
+
         <div class="wrapper">
-            <!-- Header Section -->
-            <div class="header">
-                <div class="header-logo">
-                    <div class="logo-wrapper">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f8/Nanyang_Technological_University_coat_of_arms_vector.svg/1200px-Nanyang_Technological_University_coat_of_arms_vector.svg.png" class="logo">
-                    </div>
-                </div>
-                <h2 class="header-title">NTUBank</h2>
-                <div class="user-profile">
-                    <img src="https://oneill.law.georgetown.edu/wp-content/uploads/2021/06/generic-profile.png" class="profile-icon">
-                    <form action="/profile" method="post">
-                        <input type="submit" value={{username}} class="profile-button">
-                    </form>
-                    <form action="/logout" method="post">
-                        <input type="submit" value="Logout" class="logout-button">
-                    </form>
-                </div>
-            </div>
+          <h1 class="home-title">Next generation digital banking</h1>
+          <p class="home-text">
+            Take your financial life online. Your NTUBank account 
+            will be a one-stop-shop 
+            for spending, saving, budgeting, investing, and much 
+            more.
+          </p>
+        </div>
+      </section>
 
-            <!-- Navigation Section -->
-            <div class="navigation">
-                <form action="/transfer" method="get">
-                    <input type="submit" value="Money Transfer" class="nav-button">
-                </form>
-                <form action="/expense" method="get">
-                    <input type="submit" value="Expense Tracker" class="nav-button">
-                </form>
-                <form action="/budget" method="get">
-                    <input type="submit" value="Budgeting" class="nav-button">
-                </form>
-                <form action="/goal" method="get">
-                    <input type="submit" value="Goal Planning" class="nav-button">
-                </form>
-                <form action="/invest" method="get">
-                    <input type="submit" value="Investing" class="nav-button">
-                </form>
-            </div>
+      <!-- Service Section -->
+      <section class="service" id="service">
 
-            <!-- Breadcrumb Navigation Section -->
-            <nav aria-label="breadcrumb">
-                <ul class="breadcrumb">
-                    {% for breadcrumb in breadcrumbs %}
-                        <li>
-                            {% if not loop.last %}
-                                <a href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a>
-                            {% else %}
-                                {{ breadcrumb.name }}
-                            {% endif %}
-                        </li>
-                    {% endfor %}
-                </ul>
-            </nav>
+        <h2 class="section-title">Why choose NTUBank?</h2>
+        <p class="section-text">
+          Discover products and services designed to meet your 
+          financial needs. <br>Control your finances like never before.</br>
+        </p>
 
-            <!-- Welcome Section -->
-            <h2 class="welcome-message">Welcome to NTUBank, {{username}} !</h2> 
-            <div class="account-details">
-                <div class="account-type">NTUBank Savings Account</div>
-                <div class="account-number">123-4-567890</div> <!-- to change to acct no.-->
-            </div>
+        <div class="service-card-group">
 
-            <!-- Dashboard Section -->
-            <div class="dashboard">
+          <div class="service-card">
+            <img src="static/images/icon-transfer.svg" alt="Icon for Transfer Money" class="card-icon" width="72" height="72">
+            
+            <h3 class="card-title">Transfer Money</h3>
+            <p class="card-text">
+              Transfer funds swiftly, easily and securely with 
+              MetaMask and the Sepolia testnet 
+              wherever you are in the world. 
+            </p>
+            <form action="/transfer" method="get">
+              <button type="submit" class="btn-secondary">Learn More</button>
+            </form>
+          </div>
 
-                <!-- Dashboard / Financial News-->
-                <div class="dashboard-section financial-news">
-                    <h3 class="section-title">Financial News</h3>
-                    <div class="news-list">
-                        <div class="news-item">
-                            <h4 class="news-title">
-                                <a href="https://www.cnbc.com/2024/10/21/28percent-of-credit-card-users-are-still-paying-off-last-years-holiday-debt.html">28% of credit card users are still paying off last year's holiday debt</a>
-                            </h4>
-                            <p class="news-content">Shoppers may spend $1,778 on average this holiday season, up 8%...</p>
-                            <span class="news-time">2 hours ago</span>
-                        </div>
-                        <div class="news-item">
-                            <h4 class="news-title">
-                                <a href="https://www.reuters.com/markets/deals/ubs-sells-its-50-stake-swisscard-american-express-2024-10-21/">UBS sells its 50% stake in Swisscard to American Express</a>
-                            </h4>
-                            <p class="news-content">UBS (UBSG.S) is offloading part of the Credit Suisse business...</p>
-                            <span class="news-time">4 hours ago</span>
-                        </div>
-                        <div class="news-item">
-                            <h4 class="news-title">
-                                <a href="https://www.channelnewsasia.com/singapore/fixed-deposit-accounts-bank-scams-investment-dbs-ocbc-uob-faq-4026696">FAQ: Are your fixed deposit accounts safe from scammers?</a>
-                            </h4>
-                            <p class="news-content">Phishing scams impersonating banks and malware scams stealing users'...</p>
-                            <span class="news-time">6 hours ago</span>
-                        </div>
-                    </div>                
-                </div>
+          <div class="service-card">
+            <img src="static/images/icon-expense.svg" alt="Icon for Expense Tracker" class="card-icon">
+            
+            <h3 class="card-title">Expense Tracker</h3>
+            <p class="card-text">
+              Input day-to-day expenses according to categories
+              and get chart summary of expenses.  
+              Monitor your spending habits. 
+            </p>
+            <form action="/expense" method="get">
+              <button type="submit" class="btn-secondary">Learn More</button>
+            </form>
+          </div>
 
-                <!-- Dashboard / Stock Overview -->
-                <div class="dashboard-section stock-overview">
-                    <h3 class="section-title">Stock Market Overview</h3>
-                    <table class="stock-table">
-                        <tr>
-                            <th>Index</th>
-                            <th>Price</th>
-                            <th>Change</th>
-                        </tr>
-                        <tr>
-                            <td>S&P 500</td>
-                            <td>4,185.81</td>
-                            <td class="positive">+23.42 (+0.56%)</td>
-                        </tr>
-                        <tr>
-                            <td>NASDAQ</td>
-                            <td>12,888.28</td>
-                            <td class="positive">+100.07 (+0.78%)</td>
-                        </tr>
-                        <tr>
-                            <td>DOW</td>
-                            <td>33,665.02</td>
-                            <td class="negative">-58.13 (-0.17%)</td>
-                        </tr>
-                    </table>
-    
-                    <h4 class="stocks-title">Top Company Stocks</h4>
-                    <table class="stock-table">
-                        <tr>
-                            <th>Company</th>
-                            <th>Price</th>
-                            <th>Change</th>
-                        </tr>
-                        <tr>
-                            <td>Apple (AAPL)</td>
-                            <td>$147.18</td>
-                            <td class="positive">+2.31 (+1.59%)</td>
-                        </tr>
-                        <tr>
-                            <td>Microsoft (MSFT)</td>
-                            <td>$280.57</td>
-                            <td class="positive">+3.42 (+1.23%)</td>
-                        </tr>
-                        <tr>
-                            <td>Amazon (AMZN)</td>
-                            <td>$102.11</td>
-                            <td class="negative">-0.89 (-0.86%)</td>
-                        </tr>
-                        <tr>
-                            <td>Alphabet (GOOGL)</td>
-                            <td>$94.61</td>
-                            <td class="positive">+1.23 (+1.32%)</td>
-                        </tr>
-                        <tr>
-                            <td>Meta (META)</td>
-                            <td>$195.32</td>
-                            <td class="positive">+4.67 (+2.45%)</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+          <div class="service-card">
+            <img src="static/images/icon-budget.svg" alt="Icon for Budgeting" class="card-icon" width="72" height="72">
+            
+            <h3 class="card-title">Budgeting</h3>
+            <p class="card-text">
+              Avoid overspengding with our budgeting tool which
+              provides insights to help  
+              you stay within set budget.
+            </p>
+            <form action="/budget" method="get">
+              <button type="submit" class="btn-secondary">Learn More</button>
+            </form>
+          </div>
+
+          <div class="service-card">
+            <img src="static/images/icon-goal.svg" alt="Icon for Goal Planning" class="card-icon" width="72" height="72">
+            
+            <h3 class="card-title">Goal Planning</h3>
+            <p class="card-text">
+              Set your desired retirement financial goal and 
+              target year to reach the goal.
+              Get personalised advice to achieve goal.
+            </p>
+            <form action="/goal" method="post">
+              <button type="submit" class="btn-secondary">Learn More</button>
+            </form>
+          </div>
+
+          <div class="service-card">
+            <img src="static/images/icon-invest.svg" alt="Icon for Investment" class="card-icon" width="72" height="72">
+            
+            <h3 class="card-title">Investment</h3>
+            <p class="card-text">
+              Choose preferred risk level, investment amount and 
+              duration to receive recommendations
+              on suitable investement options.
+            </p>
+            <form action="/invest" method="get">
+              <button type="submit" class="btn-secondary">Learn More</button>
+            </form>
+          </div>
 
         </div>
-        <!-- Chatbot Script -->
-        <script src="https://account.snatchbot.me/script.js"></script>
-        <script>window.sntchChat.Init(399474)</script>
-    </body>
+      </section>
+
+      <!-- News  Section -->
+       <section class="news" id="news">
+        <h2 class="section-title">Latest News</h2>
+
+        <div class="article-card-group">
+          
+          <article class="article-card">
+            <div class="card-head">
+              <img src="https://image.cnbcfm.com/api/v1/image/107348832-1702906183281-gettyimages-1863786516-_53a8955.jpeg?v=1729530394&w=1858&h=1045&ffmt=webp&vtcrop=y" alt="News Image 1" class="card-img">
+            </div>
+
+            <div class="card-body">
+              <p class="article-author">By Jessica Dickler</p>
+             
+              <h3 class="card-title">
+                <a href="https://www.cnbc.com/2024/10/21/28percent-of-credit-card-users-are-still-paying-off-last-years-holiday-debt.html" target="_blank">28% credit card users still paying off holiday debt</a>
+              </h3>
+
+              <p class="card-text">
+                For some shoppers, the upcoming holiday season may lead 
+                to significant credit card debt. 
+                Meanwhile, some people are still paying...
+              </p>
+            </div>
+
+          </article>
+
+          <article class="article-card">
+            <div class="card-head">
+              <img src="https://cassette.sphdigital.com.sg/image/businesstimes/ebc3ab5a29e4dbf87de9fc570ae36ecd0bab7b8ccf04c7b78d108fb8c59801f9?w=1520&f=webp" alt="News Image 2" class="card-img">
+            </div>
+
+            <div class="card-body">
+              <p class="article-author">By Reuters</p>
+             
+              <h3 class="card-title">
+                <a href="https://www.reuters.com/markets/deals/ubs-sells-its-50-stake-swisscard-american-express-2024-10-21/" target="_blank">UBS sells its 50% stake in Swisscard to American Express</a>
+              </h3>
+
+              <p class="card-text">
+                UBS is offloading part of the Credit Suisse business it
+                acquired last year with a deal to 
+                sell the fallen bank's 50% stake in...
+              </p>
+            </div>
+
+          </article>
+
+          <article class="article-card">
+            <div class="card-head">
+              <img src="https://onecms-res.cloudinary.com/image/upload/s--PkEElZeu--/c_fill,g_auto,h_468,w_830/fl_relative,g_south_east,l_mediacorp:cna:watermark:2021-08:cna,w_0.1/f_auto,q_auto/v1/mediacorp/cna/image/2022/07/05/atm-banks-money-cash-singapore-file-photo-data.jpg?itok=bj3waTN4" alt="News Image 3" class="card-img">
+            </div>
+
+            <div class="card-body">
+              <p class="article-author">By Lee Chong Ming</p>
+             
+              <h3 class="card-title">
+                <a href="https://www.channelnewsasia.com/singapore/fixed-deposit-accounts-bank-scams-investment-dbs-ocbc-uob-faq-4026696" target="_blank">FAQ: Are your fixed deposit accounts safe from scammers?</a>
+              </h3>
+
+              <p class="card-text">
+                Phishing scams impersonating banks and malware scams
+                stealing users’ banking credentials 
+                continue to make headlines...
+              </p>
+            </div>
+
+          </article>
+
+          <article class="article-card">
+            <div class="card-head">
+              <img src="https://static1.straitstimes.com.sg/s3fs-public/styles/large30x20/public/articles/2024/08/13/kc-netss1308.jpg?VersionId=53SIyOjmDXEt5OUlhl2VExf.eGZ5Nz4T&itok=djyqJR5z" alt="News Image 4" class="card-img">
+            </div>
+
+            <div class="card-body">
+              <p class="article-author">By Rosalind Ang</p>
+             
+              <h3 class="card-title">
+                <a href="https://www.straitstimes.com/business/new-app-by-nets-enables-merchants-in-singapore-to-use-smart-devices-to-accept-contactless-payments" target="_blank">New app by Nets enables merchants to accept contactless payments</a>
+              </h3>
+
+              <p class="card-text">
+                Consumers can look forward to a wider acceptance of 
+                contactless payments with the 
+                launch of a mobile app that allows...
+              </p>
+            </div>
+
+          </article>
+        </div>
+       </section>
+
+
+    </main>
+
+     <!-- Footer  Section -->
+     <footer>
+      <div class="wrapper-flex" id="footer">
+        <div>
+          <img src="static/images/logo.png" class="footer-brand">
+
+          <div class="social-link">
+            <ion-icon name="logo-facebook"></ion-icon>
+            <ion-icon name="logo-youtube"></ion-icon>
+            <ion-icon name="logo-twitter"></ion-icon>
+            <ion-icon name="logo-pinterest"></ion-icon>
+            <ion-icon name="logo-instagram"></ion-icon>
+          </div>
+
+        </div>
+
+        <div class="footer-nav">
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#service">Services</a></li>
+            <li><a href="#news">News</a></li>
+          </ul>
+
+          <ul>
+            <li>Contact</li>
+            <li>Email: contact@ntu-bank.com</li>
+            <li>Tel: +65 6123 4567</li>
+          </ul>
+        </div>
+
+      </div>
+      <p class="copyright">&copy; NTUBank. All Rights Reserved</p>
+     </footer>
+
+  </div>
+
+  <script>
+    const navbarToggleBtn = document.querySelector('.navbar-toggle-btn');
+    const navbarNav = document.querySelector('.navbar-nav');
+
+    const navbarToggleFunc = function () {
+      navbarToggleBtn.classList.toggle('active');
+      navbarNav.classList.toggle('active');
+    }
+
+    navbarToggleBtn.addEventListener('click', navbarToggleFunc);
+    
+  </script>
+
+
+  <!-- Ionicon links -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
 </html>
