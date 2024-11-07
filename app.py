@@ -232,7 +232,7 @@ def goal():
         {"name": "Goal", "url": "/goal"}
     ]
     display_name = users[session.get('username')]['name']
-    return render_template("goal.html",breadcrumbs=breadcrumbs)
+    return render_template("goal.html",breadcrumbs=breadcrumbs,username=display_name)
 
 @app.route("/goal_advice",methods=["GET","POST"])
 def goal_advice():
