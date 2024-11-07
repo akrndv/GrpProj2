@@ -65,7 +65,7 @@
         
             <h1 class="section-title"> Expense Tracker </h1>
 
-            <form id="ExpenseForm" class="form-section" onsubmit="transfer">
+            <form id="expenseForm" class="form-section" method="POST">
                 <label for = "category"> Category: </label>
 
                 <select id="category" name="category" required>
@@ -84,17 +84,17 @@
                 </select>
 
                 <label for = "amount"> Amount: </label>
-                <input type="number" name="Amount" step="0.01" required>
+                <input type="number" id="amount" name="Amount" step="0.01" required>
 
                 <label for = "date"> Date: </label>
-                <input type="date" name="date" required>
+                <input type="date" id="date" name="date" required>
 
                 <button> Add Expense </button>
 
             </form>
 
-            <form action="/expense" class="form-section">
-                <input type="submit" value="View Summary">
+            <form action="/expense" class="form-section" onsubmit="expSum()">
+                <button type="submit"> View Summary </button>
             </form>
 
         </div>

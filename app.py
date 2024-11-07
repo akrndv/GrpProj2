@@ -293,11 +293,11 @@ def investment_advice():
 
         q = (
             f"I have an investment amount of ${investment_amount} with a {risk_level} risk tolerance and a time horizon of {time_horizon} years."
-            "Please provide advice on how to allocate this investment in stocks, bonds, and other assets."
+            "What are common strategies for asset allocation among stocks, bonds, and other assets for investors with similar risk tolerance and time horizon?"
         )
 
         r = model.generate_content(q)
-        formatted_r = r.generated_text.replace("*", "").replace("\n", "<br>")
+        formatted_r = r.text.replace("*", "").replace("\n", "<br>")
 
         return render_template("investment_advSum.html", username=display_name, advice = formatted_r)
     

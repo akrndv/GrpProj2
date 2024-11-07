@@ -316,3 +316,10 @@ button:hover, .btn:hover {
 .investment-card:hover {
     transform: translateY(-5px);
 }
+
+.result {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 4px;
+    color: #333;
+}

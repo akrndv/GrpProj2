@@ -5,7 +5,6 @@
         <title>NTUBank Dashboard</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="{{ url_for('static', filename='expense.js') }}"></script>
     </head>
     <body>
             <div class="wrapper">
@@ -71,8 +70,6 @@
 
                 <label for="dateSelector">Select Date:</label>
                 <input type="date" id="dateSelector" value="{{ selected_date }}" onchange="updateChart()">
-
-                <canvas id="BudgetChart" width="400" height="200"></canvas>
 
             </form>
     

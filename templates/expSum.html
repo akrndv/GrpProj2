@@ -5,7 +5,6 @@
     <title>NTUBank Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="{{ url_for('static', filename='expense.js') }}"></script>
 </head>
 
 <body>
@@ -62,10 +61,11 @@
             </ul>
         </nav>
 
-        <!-- Main Body -->
+        <!-- Main Body -->s
         <h1 class="section-title">Expense Summary</h1>
-        <form id="ExpenseSummary" class="form-section" action="{{ url_for('add') }}" method="get">
+        <form id="expenseSummary" class="form-section" action="{{ url_for('add') }}" method="get">
             <h2>Total Expenses: ${{ total_expenses | round(2) }}</h2>
+
             <label for="dateSelector">Select Date:</label>
             <input type="date" id="dateSelector" value="{{ selected_date }}" onchange="updateChart()">
 
@@ -78,29 +78,33 @@
 
     <!-- Expense Chart Script -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const ctx = document.getElementById('expenseChart').getContext('2d');
-            const expenses = {{ expenses | tojson }};
-            let chart;
+        const ctx = document.getElementById('expenseChart').getContext('2d');
+        const expenses = {{ expenses | tojson }};
+        let chart; // Declare chart variable globally
 
-            function updateChart() {
+        function updateChart() {
             const selectedDate = document.getElementById('dateSelector').value;
-            const categories = expenses[selectedDate] || {};
+            const categories = expenses[selectedDate] || {}; // Default to empty object if no data
 
             const labels = Object.keys(categories);
             const data = Object.values(categories);
 
+            // Destroy existing chart to refresh data
             if (chart) {
-                chart.destroy(); // Destroy existing chart instance
+                chart.destroy();
             }
 
+            // Create new chart with updated data
             chart = new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: labels,
                     datasets: [{
                         label: 'Expenses by Category',
-                        data: data
+                        data: data,
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
                     }]
                 },
                 options: {
@@ -112,6 +116,9 @@
                 }
             });
         }
+
+        // Initialize chart for the first date with data
+        window.onload = updateChart;
 
     </script>
 
