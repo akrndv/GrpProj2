@@ -172,7 +172,7 @@ def add():
 
     return render_template("expAdd.html", breadcrumbs=breadcrumbs, username=display_name)
 
-@app.route('/budget', methods=["GET", 'POST'])
+@app.route('/budget', methods=["GET", "POST"])
 def budget():
     breadcrumbs = [
         {"name": "Dashboard", "url": "/dashboard"},
@@ -180,9 +180,19 @@ def budget():
     ]
     display_name = users[session.get('username')]['name']
 
-    if 'expenses' not in session:
-        session['expenses'] = {}
-    return render_template('budget.html', breadcrumbs=breadcrumbs, username=display_name, expenses=session['expenses'])
+    expenses = session.get('expenses', {})
+    total_spent = sum(amount for daily in expenses.values() for amount in daily.values())
+
+    monthly_budget = session.get('monthly_budget', 0)
+    remaining_budget = monthly_budget - total_spent
+
+    # If monthly_budget was posted, save to session
+    if request.method == 'POST':
+        monthly_budget = float(request.form.get('monthly_budget', 0))
+        session['monthly_budget'] = monthly_budget
+        remaining_budget = monthly_budget - total_spent  # Update remaining budget after new input
+
+    return render_template('budget.html', breadcrumbs=breadcrumbs, username=display_name, expenses=expenses, total_spent=total_spent, remaining_budget=remaining_budget, monthly_budget=monthly_budget)
 
 @app.route('/calculate_budget', methods=['POST'])
 def calculate_budget():
