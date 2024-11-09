@@ -307,5 +307,9 @@ button:hover, .btn:hover {
 }
 
 .result {
-    color: #007BFF;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 4px;
+    color: #333;
+    text-align: center;
 }
