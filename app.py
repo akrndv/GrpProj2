@@ -185,14 +185,8 @@ def budget():
 
     monthly_budget = session.get('monthly_budget', 0)
     remaining_budget = monthly_budget - total_spent
-
-    # If monthly_budget was posted, save to session
-    if request.method == 'POST':
-        monthly_budget = float(request.form.get('monthly_budget', 0))
-        session['monthly_budget'] = monthly_budget
-        remaining_budget = monthly_budget - total_spent  # Update remaining budget after new input
-
-    return render_template('budget.html', breadcrumbs=breadcrumbs, username=display_name, expenses=expenses, total_spent=total_spent, remaining_budget=remaining_budget, monthly_budget=monthly_budget)
+    
+    return render_template('budget.html', breadcrumbs=breadcrumbs, username=display_name, expenses=expenses, total_spent=total_spent, remaining_budget=remaining_budget)
 
 @app.route('/calculate_budget', methods=['POST'])
 def calculate_budget():
