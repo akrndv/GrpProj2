@@ -69,7 +69,7 @@
             <label for="dateSelector">Select Date:</label>
             <input type="date" id="dateSelector" value="{{ selected_date }}" onchange="updateChart()">
 
-            <canvas id="expenseChart" width="400" height="200"></canvas>
+            <canvas id="expenseChart"></canvas>
 
             <button type="submit">Add Expenses</button>
         </form>
@@ -108,6 +108,7 @@
                     }]
                 },
                 options: {
+                    responsive: true,
                     scales: {
                         y: {
                             beginAtZero: true
