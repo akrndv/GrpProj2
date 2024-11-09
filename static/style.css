@@ -505,7 +505,6 @@ button:hover, .btn:hover {
     button, .btn {
         width: 100%;
         padding: 10px; /* Adjust padding for smaller buttons */
-        font-size: 12px;
     }
 
     .header, .navigation {
@@ -513,7 +512,6 @@ button:hover, .btn:hover {
     }
 
     .nav-button {
-        font-size: 12px;
         padding: 10px;
     }
 
