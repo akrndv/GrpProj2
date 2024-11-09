@@ -20,17 +20,6 @@ body, html {
     gap: 20px;
 }
 
-/* Container for Login Page */
-.container {
-    display: flex;
-    max-width: 850px;
-    width: 100%;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
-}
-
 /* Form Section */
 .form-section {
     display: flex;
@@ -318,8 +307,5 @@ button:hover, .btn:hover {
 }
 
 .result {
-    margin-top: 20px;
-    padding: 10px;
-    border-radius: 4px;
-    color: #333;
+    color: #007BFF;
 }
