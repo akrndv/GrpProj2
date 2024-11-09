@@ -66,27 +66,51 @@
 
             <form id="BudgetSummary" class="form-section">
                 <h2>Total Expenses: ${{ total_spent }}</h2>
-                <h2>Remaining Budget: ${{ remaining_budget }}</h2>
+                <h2>Remaining Budget: $<span id="remaining_budget_display">{{ remaining_budget }}</span></h2>
 
                 <label for="dateSelector">Select Date:</label>
                 <input type="date" id="dateSelector" value="{{ selected_date }}" onchange="updateChart()">
 
             </form>
-    
-            <form action="/calculate_budget"  class="form-section" method="POST">
+
+            <!-- Monthly Budget Input Section -->
+            <form id="budgetForm" class="form-section" action="/calculate_budget" method="POST">
                 <label for="monthly_budget">Enter Monthly Budget ($):</label>
-                <input type="number" name="monthly_budget" step="0.01" required>
-                <button type="submit">Calculate Budget</button>
+                <input type="number" id="monthly_budget" name="monthly_budget" step="0.01" required oninput="calculateRemainingBudget()">
+
+                <!-- Advice Button - Initially Hidden -->
+                <button type="submit" id="adviceButton" style="display: none;">Get Advice</button>
             </form>
+                
+            <!-- JavaScript to Calculate Remaining Budget and Show Button -->
+            <script>
+                const totalSpent = {{ total_spent }};
+                
+                function calculateRemainingBudget() {
+                    const monthlyBudgetInput = document.getElementById('monthly_budget');
+                    const remainingBudgetDisplay = document.getElementById('remaining_budget_display');
+                    const adviceButton = document.getElementById('adviceButton');
+                    
+                    // Parse and calculate remaining budget
+                    const monthlyBudget = parseFloat(monthlyBudgetInput.value) || 0;
+                    const remainingBudget = monthlyBudget - totalSpent;
+                    remainingBudgetDisplay.textContent = remainingBudget.toFixed(2);
+
+                    // Show the advice button only if there's a valid monthly budget input
+                    if (monthlyBudget > 0) {
+                        adviceButton.style.display = 'inline-block';
+                    } else {
+                        adviceButton.style.display = 'none';
+                    }
+                }
+            </script>
 
             <form action="/expense" class="form-section" method="POST">
                 <button type="submit">View Expenses</button>
             </form>
 
         </div>
-
         
-
         <!-- Chatbot Script -->
         <script src="https://account.snatchbot.me/script.js"></script>
         <script>window.sntchChat.Init(399474)</script>
