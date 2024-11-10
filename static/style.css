@@ -330,11 +330,12 @@ button:hover, .btn:hover {
 
     .wrapper {
         padding: 10px; /* Adjust padding for more space */
+        max-width: 400px;
     }
 
     .container {
         flex-direction: column;  /* Stack elements vertically */
-        max-width: 100%;
+        max-width: 400px;
         width: 100%;
     }
 
