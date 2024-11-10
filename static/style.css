@@ -322,100 +322,55 @@ button:hover, .btn:hover {
     text-align: center;
 }
 
-/* General Styles for Small Devices (max-width: 425px) */
+/* For Tablets with 425px max-width */
 @media (max-width: 425px) {
-    body, html {
-        padding: 0 10px;  /* Add some padding on smaller screens */
-        max-width: 400px;
-    }
-
     .wrapper {
-        padding: 10px; /* Adjust padding for more space */
-        max-width: 400px;
+        max-width: 100%;
+        padding: 10px;  /* Ensure no overflow */
     }
 
     .container {
-        flex-direction: column;  /* Stack elements vertically */
-        max-width: 400px;
+        flex-direction: column;
+        padding: 10px;
     }
 
     .form-section {
-        padding: 15px; /* Reduced padding for a better fit */
+        padding: 12px;  /* Tighten padding */
         margin: 0;
-        max-width: 400px; /* Allow form to take up more space */
     }
 
     .form-header .logo {
-        width: 100px;  /* Smaller logo for mobile */
+        width: 100px;
     }
 
     .section-title {
-        font-size: 20px;  /* Slightly smaller font size for the title */
+        font-size: 18px;
     }
 
     form {
-        padding: 15px;  /* Reduce form padding */
-    }
-
-    form input[type="text"],
-    form input[type="password"],
-    form input[type="email"],
-    form input[type="number"],
-    form input[type="date"],
-    form input[type="category"],
-    form select {
-        width: 100%;  /* Full width for input fields */
-        max-width: 400px;
-        margin-bottom: 12px; /* Reduce space between inputs */
+        padding: 10px;
     }
 
     button, .btn {
-        width: 100%;
-        padding: 12px;  /* Consistent button size */
-        font-size: 14px; /* Smaller font size for buttons */
-    }
-
-    /* Adjust the header and navigation for smaller screens */
-    .header, .navigation {
-        flex-direction: column;  /* Stack header and navigation vertically */
-        align-items: center;
-        padding: 15px 0;
-    }
-
-    .header-logo {
-        justify-content: center;
-        margin-bottom: 15px;
+        font-size: 14px;
+        padding: 10px;
     }
 
     .nav-button {
-        font-size: 14px;
         padding: 10px;
         width: 100%;
-        margin-bottom: 10px;  /* Space between navigation buttons */
-    }
-
-    .profile-button, .logout-button {
-        width: 100%;  /* Ensure profile and logout buttons fit neatly */
-        margin-top: 10px;
     }
 
     .investment-card {
-        padding: 15px;  /* Reduced padding */
-        margin-bottom: 10px;  /* Adjust margin between cards */
+        padding: 12px;
     }
 
     .breadcrumb {
-        font-size: 14px;  /* Adjust breadcrumb font size */
-        padding: 8px 0;
-        justify-content: center;
-    }
-
-    .breadcrumb li {
-        font-size: 14px;  /* Smaller breadcrumb font size */
+        font-size: 12px;
     }
 
     .error-message {
-        font-size: 12px;  /* Adjust error message font */
+        font-size: 10px;
     }
 }
 
