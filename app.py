@@ -9,6 +9,8 @@ import os
 app = Flask(__name__)
 app.secret_key = "secret"
 app.config['SESSION_TYPE'] = 'filesystem'
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=30)
+
 Session(app)
 
 api = os.getenv("MAKERSUITE_API_TOKEN")
@@ -16,6 +18,11 @@ genai.configure(api_key=api)
 model = genai.GenerativeModel("gemini-1.5-flash")
 
 users = {}
+
+# Ensure the session is permanent on each request
+@app.before_request
+def make_session_permanent():
+    session.permanent = True
 
 @app.route("/", methods=["GET", "POST"])
 def login():
