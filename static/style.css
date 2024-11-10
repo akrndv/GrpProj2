@@ -477,7 +477,7 @@ button:hover, .btn:hover {
     .form-section {
         padding: 15px;  /* Minimal padding for small screens */
         width: 100%;
-        max-width: 400px;
+        max-width: 300px;
     }
 
     .form-header .logo {
