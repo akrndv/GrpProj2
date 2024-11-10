@@ -6,8 +6,6 @@ from datetime import datetime, timedelta
 import google.generativeai as genai
 import os
 
-# to add database stuff pls
-
 app = Flask(__name__)
 app.secret_key = "secret"
 app.config['SESSION_TYPE'] = 'filesystem'
