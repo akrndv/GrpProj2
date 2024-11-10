@@ -329,8 +329,6 @@ button:hover, .btn:hover {
     }
 
     .wrapper {
-        width: 100%;
-        max-width: 100%;
         padding: 10px; /* Adjust padding */
     }
 
@@ -344,21 +342,19 @@ button:hover, .btn:hover {
         padding: 20px; /* Reduce padding for smaller screens */
         width: 100%;
         margin: 0;
-        max-width: none; /* Allow full width for the form */
+        max-width: 400px; /* Allow full width for the form */
     }
 
     .form-header .logo {
         width: 180px;  /* Make logo smaller on mobile */
-        margin-right: 10px;
     }
 
     .section-title {
-        font-size: 22px;  /* Slightly smaller font size for smaller screens */
+        font-size: 20px;  /* Slightly smaller font size for smaller screens */
     }
 
     form {
         padding: 15px;  /* Reduced padding */
-        max-width: 100%;  /* Full width for form fields */
     }
 
     form input[type="text"],
@@ -369,7 +365,6 @@ button:hover, .btn:hover {
     form input[type="category"],
     form select {
         width: 100%;  /* Ensure input fields take full width */
-        margin-bottom: 12px;
     }
 
     button, .btn {
