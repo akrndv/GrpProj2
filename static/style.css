@@ -336,18 +336,16 @@ button:hover, .btn:hover {
     .container {
         flex-direction: column;  /* Stack elements vertically */
         max-width: 400px;
-        width: 100%;
     }
 
     .form-section {
         padding: 15px; /* Reduced padding for a better fit */
-        width: 100%;
         margin: 0;
         max-width: 400px; /* Allow form to take up more space */
     }
 
     .form-header .logo {
-        width: 160px;  /* Smaller logo for mobile */
+        width: 100px;  /* Smaller logo for mobile */
     }
 
     .section-title {
@@ -366,6 +364,7 @@ button:hover, .btn:hover {
     form input[type="category"],
     form select {
         width: 100%;  /* Full width for input fields */
+        max-width: 400px;
         margin-bottom: 12px; /* Reduce space between inputs */
     }
 
