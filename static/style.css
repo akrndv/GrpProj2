@@ -326,6 +326,7 @@ button:hover, .btn:hover {
 @media (max-width: 425px) {
     body, html {
         padding: 0 10px;  /* Add some padding on smaller screens */
+        max-width: 400px;
     }
 
     .wrapper {
