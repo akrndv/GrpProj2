@@ -322,173 +322,70 @@ button:hover, .btn:hover {
     text-align: center;
 }
 
-/* Media Query for Devices with 375px Width (like iPhone 6/7/8) */
-@media (max-width: 375px) {
-    .form-section {
-        padding: 15px; /* Adequate padding for readability */
-        width: 100%; /* Full width for smaller screens */
-        max-width: 100%; /* Ensure it doesn't exceed the screen width */
-        box-sizing: border-box; /* Include padding in width calculation */
-    }
-
-    .form-header .logo {
-        width: 150px; /* Adjust logo size */
-        margin: 0 auto; /* Center the logo */
-    }
-
-    .section-title {
-        font-size: 20px; /* Slightly smaller font size */
-        text-align: center; /* Center the title */
-    }
-
-    form {
-        padding: 15px; /* Adjust padding for better fit */
-        width: 100%; /* Ensure full width for form */
-    }
-
-    form input[type="text"],
-    form input[type="password"],
-    form input[type="email"],
-    form input[type="number"],
-    form input[type="date"],
-    form select {
-        width: 100%; /* Ensure input fields fit properly */
-        padding: 10px; /* Consistent padding */
-        margin-bottom: 10px; /* Space between fields */
-        border: 1px solid #ccc; /* Add border for better visibility */
-        border-radius: 4px; /* Rounded corners */
-    }
-
-    button, .btn {
-        width: 100%; /* Full width for buttons */
-        padding: 10px; /* Adjust padding for smaller buttons */
-        background-color: #007bff; /* Button background color */
-        color: white; /* Button text color */
-        border: none; /* Remove border */
-        border-radius: 4px; /* Rounded corners */
-        cursor: pointer; /* Pointer cursor on hover */
-    }
-
-    button:hover, .btn:hover {
-        background-color: #0056b3; /* Darker shade on hover */
-    }
-
-    .error-message {
-        font-size: 12px; /* Adjust error message font */
-        color: red; /* Error message color */
-        text-align: center; /* Center error messages */
-    }
-}
-
-
-/* For Devices with 320px Width (like iPhone SE) */
-@media (max-width: 320px) {
-    body, html {
-        padding: 0 5px; /* Add padding to avoid overflow */
-    }
-
-    .wrapper {
-        padding: 0 5px; /* Padding to avoid cutoff */
-    }
-
-    .form-section {
-        padding: 10px; /* Minimal padding for small screens */
-        width: 100%; /* Full width for form section */
-        max-width: 100%; /* Ensure it doesn't exceed the screen width */
-        box-sizing: border-box; /* Include padding in width calculation */
-    }
-
-    .form-header .logo {
-        width: 140px; /* Logo smaller for compactness */
-    }
-
-    .section-title {
-        font-size: 16px; /* Adjust title size */
-    }
-
-    form {
-        padding: 10px; /* Smaller padding for tight screens */
-        width: 100%; /* Ensure full width for form */
-    }
-
-    form input[type="text"],
-    form input[type="password"],
-    form input[type="email"],
-    form input[type="number"],
-    form select {
-        width: 100%; /* Full width for form fields */
-        padding: 8px; /* Smaller padding */
-    }
-
-    button, .btn {
-        width: 100%;
-        padding: 8px; /* Adjust padding for smaller buttons */
-    }
-
-    .header, .navigation {
-        padding: 10px 0; /* Adjust padding for header and navigation */
-    }
-
-    .nav-button {
-        padding: 8px; /* Smaller padding for nav buttons */
-    }
-
-    .investment-card {
-        padding: 10px; /* Reduced padding */
-        margin-bottom: 8px; /* Adjust margin */
-    }
-
-    .breadcrumb {
-        font-size: 12px; /* Smaller font size for breadcrumb */
-    }
-
-    .error-message {
-        font-size: 10px; /* Adjust error message font */
-    }
-
-    .result {
-        font-size: 12px; /* Adjust result font size */
-    }
-}
-
-/* For Devices with 425px max-width */
+/* For Tablets with 425px max-width */
 @media (max-width: 425px) {
-    body, html {
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden; /* Prevent horizontal scrolling */
-    }
-
     .wrapper {
         max-width: 100%;
-        padding: 0 5px; /* Reduce padding to avoid cutoff */
-        box-sizing: border-box;
+        padding: 10px;  /* Ensure no overflow */
     }
 
     .container {
         flex-direction: column;
         padding: 10px;
-        width: 100%; /* Ensure it fits screen width */
-        margin: 0 auto;
     }
 
     .form-section {
-        width: 100%; /* Full width for smaller screens */
-        padding: 15px; /* Reduce padding for smaller devices */
+        padding: 12px;  /* Tighten padding */
         margin: 0;
     }
 
     .form-header .logo {
-        width: 100px; /* Adjust logo size */
+        width: 100px;
     }
 
     .section-title {
-        font-size: 18px; /* Smaller title font size */
+        font-size: 18px;
     }
 
     form {
+        padding: 10px;
+    }
+
+    button, .btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .nav-button {
+        padding: 10px;
         width: 100%;
-        padding: 15px; /* Adjust padding for better fit */
+    }
+
+    .investment-card {
+        padding: 12px;
+    }
+
+    .breadcrumb {
+        font-size: 12px;
+    }
+
+    .error-message {
+        font-size: 10px;
+    }
+}
+
+/* For Devices with 375px Width (like iPhone 6/7/8) */
+@media (max-width: 375px) {
+    .form-section {
+        padding: 20px; /* Adequate padding for readability */
+    }
+
+    .form-header .logo {
+        width: 180px;  /* Adjust logo size */
+    }
+
+    .section-title {
+        font-size: 20px;  /* Slightly smaller font size */
     }
 
     form input[type="text"],
@@ -498,33 +395,92 @@ button:hover, .btn:hover {
     form input[type="date"],
     form input[type="category"],
     form select {
-        width: 100%; /* Ensure input fields fit within width */
-        padding: 10px; /* Adjust padding for better usability */
+        width: 100%;  /* Ensure input fields fit properly */
     }
 
-    button, .btn, .nav-button {
+    .nav-button {
+        padding: 10px;
         width: 100%;
+    }
+
+    .investment-card {
+        padding: 15px;  /* Adjust padding for small screens */
+    }
+
+    .breadcrumb li {
         font-size: 14px;
+    }
+
+    .error-message {
+        font-size: 12px;
+    }
+}
+
+/* For Devices with 320px Width (like iPhone SE) */
+@media (max-width: 320px) {
+    body, html {
+        padding: 0 5px; /* Add more padding to avoid overflow */
+    }
+
+    .wrapper {
+        padding: 10px;
+    }
+
+    .form-section {
+        padding: 15px;  /* Minimal padding for small screens */
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .form-header .logo {
+        width: 160px; /* Logo even smaller */
+    }
+
+    .section-title {
+        font-size: 14px;  /* Adjust title size */
+    }
+
+    form {
+        padding: 12px;  /* Smaller padding for tight screens */
+    }
+
+    form input[type="text"],
+    form input[type="password"],
+    form input[type="email"],
+    form input[type="number"],
+    form input[type="date"],
+    form input[type="category"],
+    form select {
+        width: 100%;  /* Full width for form fields */
+    }
+
+    button, .btn {
+        width: 100%;
+        padding: 10px; /* Adjust padding for smaller buttons */
+    }
+
+    .header, .navigation {
+        padding: 10px 0;
+    }
+
+    .nav-button {
         padding: 10px;
     }
 
     .investment-card {
-        padding: 12px; /* Reduce padding for better fit */
-        margin-bottom: 15px;
+        padding: 12px;  /* Reduced padding */
+        margin-bottom: 8px;
     }
 
     .breadcrumb {
-        font-size: 12px; /* Smaller breadcrumb font size */
-        padding: 5px 0; /* Adjust padding to prevent overflow */
-    }
-
-    .breadcrumb li {
-        overflow-wrap: break-word; /* Break long breadcrumb items if needed */
+        font-size: 12px;  /* Smaller font size for breadcrumb */
     }
 
     .error-message {
-        font-size: 10px; /* Smaller error message font size */
+        font-size: 10px;  /* Adjust error message font */
     }
+    .result {
+        font-size: 12px;
 }
 
 /* For Tablet Devices (768px) */
