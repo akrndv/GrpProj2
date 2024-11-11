@@ -425,7 +425,6 @@ button:hover, .btn:hover {
     form input[type="email"],
     form input[type="number"],
     form input[type="date"],
-    form input[type="category"],
     form select {
         width: 100%; /* Ensure input fields fit properly */
         padding: 10px; /* Consistent padding */
@@ -448,6 +447,7 @@ button:hover, .btn:hover {
         font-size: 12px; /* Adjust error message font */
     }
 }
+
 
 /* For Devices with 320px Width (like iPhone SE) */
 @media (max-width: 320px) {
@@ -483,8 +483,6 @@ button:hover, .btn:hover {
     form input[type="password"],
     form input[type="email"],
     form input[type="number"],
-    form input[type="date"],
-    form input[type="category"],
     form select {
         width: 100%; /* Full width for form fields */
         padding: 8px; /* Smaller padding */
