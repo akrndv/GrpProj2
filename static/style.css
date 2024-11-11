@@ -330,7 +330,6 @@ button:hover, .btn:hover {
     }
 
     body, html {
-        overflow-x: hidden; /* Prevent horizontal scrolling */
         margin: 0;
         padding: 0;
     }
