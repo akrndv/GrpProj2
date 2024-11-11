@@ -324,44 +324,47 @@ button:hover, .btn:hover {
 
 /* For Devices with 425px max-width */
 @media (max-width: 425px) {
+    /* Apply border-box universally to manage widths and paddings better */
+    * {
+        box-sizing: border-box;
+    }
+
     body, html {
         overflow-x: hidden; /* Prevent horizontal scrolling */
-        margin: 0; /* Ensure no extra margin */
+        margin: 0;
         padding: 0;
     }
 
     .wrapper {
         max-width: 100%;
-        padding: 10px; /* Ensure no overflow */
+        padding: 0 10px; /* Reduce padding to avoid cutoff */
         box-sizing: border-box;
     }
 
     .container {
         flex-direction: column;
         padding: 10px;
-        width: 100%; /* Full width for small devices */
-        box-sizing: border-box;
+        width: 100%; /* Ensure it fits screen width */
         margin: 0 auto;
     }
 
     .form-section {
-        padding: 12px; /* Tighten padding */
+        width: 100%; /* Full width for smaller screens */
+        padding: 15px; /* Reduce padding for smaller devices */
         margin: 0;
-        width: 100%;
     }
 
     .form-header .logo {
-        width: 100px;
+        width: 100px; /* Adjust logo size */
     }
 
     .section-title {
-        font-size: 18px;
+        font-size: 18px; /* Smaller title font size */
     }
 
     form {
         width: 100%;
         padding: 15px; /* Adjust padding for better fit */
-        box-sizing: border-box;
     }
 
     form input[type="text"],
@@ -371,38 +374,34 @@ button:hover, .btn:hover {
     form input[type="date"],
     form input[type="category"],
     form select {
-        width: 100%;  /* Ensure input fields fit properly */
+        width: 100%; /* Ensure input fields fit within width */
     }
 
-    button, .btn {
+    button, .btn, .nav-button {
         width: 100%;
         font-size: 14px;
         padding: 10px;
-    }
-
-    .nav-button {
-        width: 100%;
-        padding: 10px;
-        font-size: 14px;
     }
 
     .investment-card {
-        padding: 12px;
+        padding: 12px; /* Reduce padding for better fit */
         margin-bottom: 15px;
     }
 
     .breadcrumb {
-        font-size: 12px;
+        font-size: 12px; /* Smaller breadcrumb font size */
+        padding: 5px 0; /* Adjust padding to prevent overflow */
     }
 
     .breadcrumb li {
-        overflow-wrap: break-word; /* Break long breadcrumbs if needed */
+        overflow-wrap: break-word; /* Break long breadcrumb items if needed */
     }
 
     .error-message {
         font-size: 10px;
     }
 }
+
 /* For Devices with 375px Width (like iPhone 6/7/8) */
 @media (max-width: 375px) {
     .form-section {
