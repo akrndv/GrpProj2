@@ -308,7 +308,7 @@ def investment_advice():
         r = model.generate_content(q)
         formatted_r = r.text.replace("*", "").replace("\n", "<br>")
 
-        return render_template("investment_advSum.html", username=display_name, advice = formatted_r)
+        return render_template("investment_advSum.html",  breadcrumbs=breadcrumbs, username=display_name, advice = formatted_r)
     
     return render_template("investment_advice.html", breadcrumbs=breadcrumbs, username=display_name, advice=None)
 
