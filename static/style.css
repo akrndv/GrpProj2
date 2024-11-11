@@ -324,19 +324,15 @@ button:hover, .btn:hover {
 
 /* For Devices with 425px max-width */
 @media (max-width: 425px) {
-    /* Apply border-box universally to manage widths and paddings better */
-    * {
-        box-sizing: border-box;
-    }
-
     body, html {
         margin: 0;
         padding: 0;
+        overflow-x: hidden; /* Prevent horizontal scrolling */
     }
 
     .wrapper {
         max-width: 100%;
-        padding: 0 10px; /* Reduce padding to avoid cutoff */
+        padding: 0 5px; /* Reduce padding to avoid cutoff */
         box-sizing: border-box;
     }
 
@@ -374,6 +370,7 @@ button:hover, .btn:hover {
     form input[type="category"],
     form select {
         width: 100%; /* Ensure input fields fit within width */
+        padding: 10px; /* Adjust padding for better usability */
     }
 
     button, .btn, .nav-button {
@@ -397,7 +394,7 @@ button:hover, .btn:hover {
     }
 
     .error-message {
-        font-size: 10px;
+        font-size: 10px; /* Smaller error message font size */
     }
 }
 
