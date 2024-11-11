@@ -324,27 +324,13 @@ button:hover, .btn:hover {
 
 /* For Tablets with 425px max-width */
 @media (max-width: 425px) {
-    .wrapper {
-        max-width: 100%;
-        padding: 10px;  /* Ensure no overflow */
+    body, html {
+        overflow-x: hidden; /* Prevent horizontal scrolling */
     }
 
-    .container {
-        flex-direction: column;
-        padding: 10px;
-    }
-
-    .form-section {
-        padding: 12px;  /* Tighten padding */
-        margin: 0;
-    }
-
-    .form-header .logo {
-        width: 100px;
-    }
-
-    .section-title {
-        font-size: 18px;
+    .container, .form-section, .header, .navigation, .wrapper {
+        padding: 10px; /* Adjust side padding to prevent overflow */
+        width: calc(100% - 20px); /* Ensure the width fits within the screen */
     }
 
     form {
@@ -365,8 +351,8 @@ button:hover, .btn:hover {
         padding: 12px;
     }
 
-    .breadcrumb {
-        font-size: 12px;
+    .breadcrumb, .breadcrumb li {
+        overflow-wrap: break-word; /* Break long breadcrumbs if needed */
     }
 
     .error-message {
