@@ -322,82 +322,6 @@ button:hover, .btn:hover {
     text-align: center;
 }
 
-/* For Devices with 425px max-width */
-@media (max-width: 425px) {
-    body, html {
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden; /* Prevent horizontal scrolling */
-    }
-
-    .wrapper {
-        max-width: 100%;
-        padding: 0 5px; /* Reduce padding to avoid cutoff */
-        box-sizing: border-box;
-    }
-
-    .container {
-        flex-direction: column;
-        padding: 10px;
-        width: 100%; /* Ensure it fits screen width */
-        margin: 0 auto;
-    }
-
-    .form-section {
-        width: 100%; /* Full width for smaller screens */
-        padding: 15px; /* Reduce padding for smaller devices */
-        margin: 0;
-    }
-
-    .form-header .logo {
-        width: 100px; /* Adjust logo size */
-    }
-
-    .section-title {
-        font-size: 18px; /* Smaller title font size */
-    }
-
-    form {
-        width: 100%;
-        padding: 15px; /* Adjust padding for better fit */
-    }
-
-    form input[type="text"],
-    form input[type="password"],
-    form input[type="email"],
-    form input[type="number"],
-    form input[type="date"],
-    form input[type="category"],
-    form select {
-        width: 100%; /* Ensure input fields fit within width */
-        padding: 10px; /* Adjust padding for better usability */
-    }
-
-    button, .btn, .nav-button {
-        width: 100%;
-        font-size: 14px;
-        padding: 10px;
-    }
-
-    .investment-card {
-        padding: 12px; /* Reduce padding for better fit */
-        margin-bottom: 15px;
-    }
-
-    .breadcrumb {
-        font-size: 12px; /* Smaller breadcrumb font size */
-        padding: 5px 0; /* Adjust padding to prevent overflow */
-    }
-
-    .breadcrumb li {
-        overflow-wrap: break-word; /* Break long breadcrumb items if needed */
-    }
-
-    .error-message {
-        font-size: 10px; /* Smaller error message font size */
-    }
-}
-
 /* Media Query for Devices with 375px Width (like iPhone 6/7/8) */
 @media (max-width: 375px) {
     .form-section {
@@ -524,6 +448,82 @@ button:hover, .btn:hover {
 
     .result {
         font-size: 12px; /* Adjust result font size */
+    }
+}
+
+/* For Devices with 425px max-width */
+@media (max-width: 425px) {
+    body, html {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden; /* Prevent horizontal scrolling */
+    }
+
+    .wrapper {
+        max-width: 100%;
+        padding: 0 5px; /* Reduce padding to avoid cutoff */
+        box-sizing: border-box;
+    }
+
+    .container {
+        flex-direction: column;
+        padding: 10px;
+        width: 100%; /* Ensure it fits screen width */
+        margin: 0 auto;
+    }
+
+    .form-section {
+        width: 100%; /* Full width for smaller screens */
+        padding: 15px; /* Reduce padding for smaller devices */
+        margin: 0;
+    }
+
+    .form-header .logo {
+        width: 100px; /* Adjust logo size */
+    }
+
+    .section-title {
+        font-size: 18px; /* Smaller title font size */
+    }
+
+    form {
+        width: 100%;
+        padding: 15px; /* Adjust padding for better fit */
+    }
+
+    form input[type="text"],
+    form input[type="password"],
+    form input[type="email"],
+    form input[type="number"],
+    form input[type="date"],
+    form input[type="category"],
+    form select {
+        width: 100%; /* Ensure input fields fit within width */
+        padding: 10px; /* Adjust padding for better usability */
+    }
+
+    button, .btn, .nav-button {
+        width: 100%;
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .investment-card {
+        padding: 12px; /* Reduce padding for better fit */
+        margin-bottom: 15px;
+    }
+
+    .breadcrumb {
+        font-size: 12px; /* Smaller breadcrumb font size */
+        padding: 5px 0; /* Adjust padding to prevent overflow */
+    }
+
+    .breadcrumb li {
+        overflow-wrap: break-word; /* Break long breadcrumb items if needed */
+    }
+
+    .error-message {
+        font-size: 10px; /* Smaller error message font size */
     }
 }
 
