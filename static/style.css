@@ -322,36 +322,80 @@ button:hover, .btn:hover {
     text-align: center;
 }
 
-/* For Tablets with 425px max-width */
+/* For Devices with 425px max-width */
 @media (max-width: 425px) {
     body, html {
         overflow-x: hidden; /* Prevent horizontal scrolling */
+        margin: 0; /* Ensure no extra margin */
+        padding: 0;
     }
 
-    .container, .form-section, .header, .navigation, .wrapper {
-        padding: 10px; /* Adjust side padding to prevent overflow */
-        width: calc(100% - 20px); /* Ensure the width fits within the screen */
+    .wrapper {
+        max-width: 100%;
+        padding: 10px; /* Ensure no overflow */
+        box-sizing: border-box;
+    }
+
+    .container {
+        flex-direction: column;
+        padding: 10px;
+        width: 100%; /* Full width for small devices */
+        box-sizing: border-box;
+        margin: 0 auto;
+    }
+
+    .form-section {
+        padding: 12px; /* Tighten padding */
+        margin: 0;
+        width: 100%;
+    }
+
+    .form-header .logo {
+        width: 100px;
+    }
+
+    .section-title {
+        font-size: 18px;
     }
 
     form {
-        padding: 10px;
+        width: 100%;
+        padding: 15px; /* Adjust padding for better fit */
+        box-sizing: border-box;
+    }
+
+    form input[type="text"],
+    form input[type="password"],
+    form input[type="email"],
+    form input[type="number"],
+    form input[type="date"],
+    form input[type="category"],
+    form select {
+        width: 100%;  /* Ensure input fields fit properly */
     }
 
     button, .btn {
+        width: 100%;
         font-size: 14px;
         padding: 10px;
     }
 
     .nav-button {
-        padding: 10px;
         width: 100%;
+        padding: 10px;
+        font-size: 14px;
     }
 
     .investment-card {
         padding: 12px;
+        margin-bottom: 15px;
     }
 
-    .breadcrumb, .breadcrumb li {
+    .breadcrumb {
+        font-size: 12px;
+    }
+
+    .breadcrumb li {
         overflow-wrap: break-word; /* Break long breadcrumbs if needed */
     }
 
@@ -359,7 +403,6 @@ button:hover, .btn:hover {
         font-size: 10px;
     }
 }
-
 /* For Devices with 375px Width (like iPhone 6/7/8) */
 @media (max-width: 375px) {
     .form-section {
