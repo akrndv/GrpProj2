@@ -322,54 +322,24 @@ button:hover, .btn:hover {
     text-align: center;
 }
 
-/* For Tablets with 425px max-width */
-@media (max-width: 425px) {
+@media (max-width: 320px) {
     .wrapper {
-        max-width: 100%;
-        padding: 10px;  /* Ensure no overflow */
+        padding: 5px;
     }
-
-    .container {
-        flex-direction: column;
-        padding: 10px;
-    }
-
     .form-section {
-        padding: 12px;  /* Tighten padding */
-        margin: 0;
+        padding: 10px;
+        max-width: 280px;
     }
-
     .form-header .logo {
-        width: 100px;
+        width: 140px; /* Reduce logo size */
     }
-
     .section-title {
-        font-size: 18px;
+        font-size: 18px; /* Adjust title size */
     }
-
-    form {
-        padding: 10px;
-    }
-
-    button, .btn {
+    form input, button, .btn {
         font-size: 14px;
-        padding: 10px;
     }
-
-    .nav-button {
-        padding: 10px;
-        width: 100%;
-    }
-
-    .investment-card {
-        padding: 12px;
-    }
-
     .breadcrumb {
-        font-size: 12px;
-    }
-
-    .error-message {
         font-size: 10px;
     }
 }
@@ -377,170 +347,50 @@ button:hover, .btn:hover {
 /* For Devices with 375px Width (like iPhone 6/7/8) */
 @media (max-width: 375px) {
     .form-section {
-        padding: 20px; /* Adequate padding for readability */
+        padding: 15px;
     }
-
     .form-header .logo {
-        width: 180px;  /* Adjust logo size */
+        width: 160px;
     }
-
     .section-title {
-        font-size: 20px;  /* Slightly smaller font size */
+        font-size: 20px;
     }
-
-    form input[type="text"],
-    form input[type="password"],
-    form input[type="email"],
-    form input[type="number"],
-    form input[type="date"],
-    form input[type="category"],
-    form select {
-        width: 100%;  /* Ensure input fields fit properly */
-    }
-
-    .nav-button {
-        padding: 10px;
-        width: 100%;
-    }
-
-    .investment-card {
-        padding: 15px;  /* Adjust padding for small screens */
-    }
-
-    .breadcrumb li {
+    form input, button, .btn {
         font-size: 14px;
-    }
-
-    .error-message {
-        font-size: 12px;
+        width: 100%; /* Ensure fields fit well */
     }
 }
 
-/* For Devices with 320px Width (like iPhone SE) */
-@media (max-width: 320px) {
-    body, html {
-        padding: 0 5px; /* Add more padding to avoid overflow */
-    }
-
+/* For Tablets with 425px max-width */
+@media (max-width: 425px) {
     .wrapper {
         padding: 10px;
     }
-
-    .form-section {
-        padding: 15px;  /* Minimal padding for small screens */
-        width: 100%;
-        max-width: 300px;
+    .container, .form-section, form, .investment-card {
+        padding: 15px;
+        max-width: 380px;
     }
-
-    .form-header .logo {
-        width: 160px; /* Logo even smaller */
-    }
-
     .section-title {
-        font-size: 14px;  /* Adjust title size */
+        font-size: 22px;
     }
-
-    form {
-        padding: 12px;  /* Smaller padding for tight screens */
-    }
-
-    form input[type="text"],
-    form input[type="password"],
-    form input[type="email"],
-    form input[type="number"],
-    form input[type="date"],
-    form input[type="category"],
-    form select {
-        width: 100%;  /* Full width for form fields */
-    }
-
-    button, .btn {
-        width: 100%;
-        padding: 10px; /* Adjust padding for smaller buttons */
-    }
-
-    .header, .navigation {
-        padding: 10px 0;
-    }
-
-    .nav-button {
-        padding: 10px;
-    }
-
-    .investment-card {
-        padding: 12px;  /* Reduced padding */
-        margin-bottom: 8px;
-    }
-
-    .breadcrumb {
-        font-size: 12px;  /* Smaller font size for breadcrumb */
-    }
-
-    .error-message {
-        font-size: 10px;  /* Adjust error message font */
-    }
-    .result {
-        font-size: 12px;
 }
 
 /* For Tablet Devices (768px) */
 @media (max-width: 768px) {
     .container {
-        flex-direction: column;  /* Stack elements vertically */
+        flex-direction: column; /* Stack elements vertically */
     }
-
-    .form-section {
-        padding: 20px;
-        max-width: 100%;
-        margin: 0 auto;
-    }
-
     .section-title {
-        font-size: 24px;  /* Adjust font size for tablet */
+        font-size: 24px;
     }
-
-    form {
-        padding: 20px;
-        font-size: 12px;
-    }
-
-    form input[type="text"],
-    form input[type="password"],
-    form input[type="email"],
-    form input[type="number"],
-    form input[type="date"],
-    form input[type="category"],
-    form select {
-        width: 100%;  /* Ensure full-width inputs */
-        margin-bottom: 12px;
-    }
-
-    button, .btn {
-        width: 100%;
-        padding: 12px;
-        font-size: 16px;
-    }
-
     .header, .navigation {
-        flex-direction: column; /* Stack header and nav items vertically */
+        flex-direction: column; /* Stack items in header/navigation */
         align-items: center;
-        padding: 15px 0;
+        padding: 10px;
     }
-
     .nav-button {
-        font-size: 16px;
         padding: 12px;
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    .investment-card {
-        padding: 18px;  /* Adjust padding for tablet */
-        margin-bottom: 15px;
-    }
-
-    .breadcrumb {
-        font-size: 14px;
-        padding: 10px 0;
+        font-size: 16px;
+        width: 100%; /* Fit full width of screen */
     }
 }
