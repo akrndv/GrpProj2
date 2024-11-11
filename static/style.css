@@ -398,7 +398,7 @@ button:hover, .btn:hover {
     }
 }
 
-/* For Devices with 375px Width (like iPhone 6/7/8) */
+/* Media Query for Devices with 375px Width (like iPhone 6/7/8) */
 @media (max-width: 375px) {
     .form-section {
         padding: 15px; /* Adequate padding for readability */
@@ -409,10 +409,12 @@ button:hover, .btn:hover {
 
     .form-header .logo {
         width: 150px; /* Adjust logo size */
+        margin: 0 auto; /* Center the logo */
     }
 
     .section-title {
         font-size: 20px; /* Slightly smaller font size */
+        text-align: center; /* Center the title */
     }
 
     form {
@@ -428,23 +430,29 @@ button:hover, .btn:hover {
     form select {
         width: 100%; /* Ensure input fields fit properly */
         padding: 10px; /* Consistent padding */
+        margin-bottom: 10px; /* Space between fields */
+        border: 1px solid #ccc; /* Add border for better visibility */
+        border-radius: 4px; /* Rounded corners */
     }
 
     button, .btn {
-        width: 100%;
+        width: 100%; /* Full width for buttons */
         padding: 10px; /* Adjust padding for smaller buttons */
+        background-color: #007bff; /* Button background color */
+        color: white; /* Button text color */
+        border: none; /* Remove border */
+        border-radius: 4px; /* Rounded corners */
+        cursor: pointer; /* Pointer cursor on hover */
     }
 
-    .investment-card {
-        padding: 15px; /* Adjust padding for small screens */
-    }
-
-    .breadcrumb li {
-        font-size: 14px; /* Smaller font size for breadcrumb */
+    button:hover, .btn:hover {
+        background-color: #0056b3; /* Darker shade on hover */
     }
 
     .error-message {
         font-size: 12px; /* Adjust error message font */
+        color: red; /* Error message color */
+        text-align: center; /* Center error messages */
     }
 }
 
